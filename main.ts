@@ -8,6 +8,17 @@ enum RadioMessage {
  * 
  * 1 = Remote
  */
+input.onButtonPressed(Button.AB, function () {
+    if (group == 1 && connected == 1) {
+        if (armed == 0) {
+            armed = 1
+        } else if (armed == 0) {
+            armed = 0
+        }
+    } else {
+    	
+    }
+})
 radio.onReceivedValue(function (name, value) {
     if (group == 0 && connected == 1) {
         if (name == "Throttle") {
@@ -45,6 +56,7 @@ let Roll = 0
 let Pitch = 0
 let Yaw = 0
 let Throttle = 0
+let armed = 0
 let connected = 0
 let group = 0
 group = 2
@@ -97,8 +109,15 @@ basic.forever(function () {
             radio.sendValue("Yaw", 0)
             radio.sendValue("Pitch", 0)
             radio.sendValue("Roll", 0)
-            radio.sendValue("Arm", 0)
+            radio.sendValue("Arm", armed)
         }
+    } else {
+    	
+    }
+})
+basic.forever(function () {
+    if (group == 1 && connected == 1) {
+    	
     } else {
     	
     }
