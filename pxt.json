@@ -5,7 +5,8 @@
         "core": "*",
         "radio": "*",
         "microphone": "*",
-        "radio-broadcast": "*"
+        "radio-broadcast": "*",
+        "pxt-airbit": "github:gomakekit/pxt-airbit#v0.0.1"
     },
     "files": [
         "main.blocks",
