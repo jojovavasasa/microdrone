@@ -8,6 +8,20 @@ enum RadioMessage {
  * 
  * 1 = Remote
  */
+input.onPinPressed(TouchPin.P0, function () {
+    if (group == 1 && connected == 1) {
+        yawed += 1
+    } else {
+    	
+    }
+})
+input.onButtonPressed(Button.A, function () {
+    if (group == 1 && connected == 1) {
+        throttled += 1
+    } else {
+    	
+    }
+})
 input.onButtonPressed(Button.AB, function () {
     if (group == 1 && connected == 1) {
         if (armed == 0) {
@@ -15,6 +29,20 @@ input.onButtonPressed(Button.AB, function () {
         } else if (armed == 0) {
             armed = 0
         }
+    } else {
+    	
+    }
+})
+input.onButtonPressed(Button.B, function () {
+    if (group == 1 && connected == 1) {
+        throttled += -1
+    } else {
+    	
+    }
+})
+input.onPinPressed(TouchPin.P1, function () {
+    if (group == 1 && connected == 1) {
+        yawed += -1
     } else {
     	
     }
@@ -57,6 +85,8 @@ let Pitch = 0
 let Yaw = 0
 let Throttle = 0
 let armed = 0
+let throttled = 0
+let yawed = 0
 let connected = 0
 let group = 0
 group = 2
@@ -105,19 +135,12 @@ basic.forever(function () {
     } else if (group == 1 && connected == 1) {
         // remote loop
         while (true) {
-            radio.sendValue("Throttle", 0)
-            radio.sendValue("Yaw", 0)
-            radio.sendValue("Pitch", 0)
-            radio.sendValue("Roll", 0)
+            radio.sendValue("Throttle", throttled)
+            radio.sendValue("Yaw", yawed)
+            radio.sendValue("Pitch", input.rotation(Rotation.Pitch))
+            radio.sendValue("Roll", input.rotation(Rotation.Roll))
             radio.sendValue("Arm", armed)
         }
-    } else {
-    	
-    }
-})
-basic.forever(function () {
-    if (group == 1 && connected == 1) {
-    	
     } else {
     	
     }
